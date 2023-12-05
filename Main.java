@@ -1,4 +1,4 @@
-import CONTROLLER.ApplicationController;
+import Controller.ApplicationController;
 
 import java.util.Scanner;
 
