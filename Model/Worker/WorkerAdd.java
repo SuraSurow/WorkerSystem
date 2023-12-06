@@ -2,6 +2,7 @@ package Model.Worker;
 
 import Model.Inherited.Director;
 import Model.Inherited.Trader;
+import Service.InitService;
 import View.View;
 import Service.UniversalSetterField;
 
@@ -54,7 +55,7 @@ public class WorkerAdd {
         List<String> combinedFields = new ArrayList<>(basicFields);
         combinedFields.addAll(specificFields);
 
-
+        System.out.println("\nProszę o oddzielanie danych za pomoca znaku '_' tzw podloga !!!");
         for(int i = 0 ; i < combinedFields.size() ; i++)
         {
             boolean success = true;
@@ -63,6 +64,22 @@ public class WorkerAdd {
                 System.out.print("wpisz "+ fieldName +" = ");
                 String input = scanner.next();
                 success = UniversalSetterField.setField(newWorker,fieldName,input);
+                if ( fieldName == "Pesel")
+                {
+                    if ( ! InitService.PeselChecker(input) )
+                    {
+                        System.out.println("\nWpisano bledny Pesel ( Syntax ) !!!");
+                        success = false;
+                        continue;
+                    }
+                    if ( ! InitService.exceptionalPesel(input,dataBase) )
+                    {
+                        System.out.println("\nWpisano Pesel ktory znajduje sie w Systemie !!!");
+                        success = false;
+                        continue;
+                    }
+                }
+
             }while(!success);
         }
 

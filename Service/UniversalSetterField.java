@@ -11,14 +11,13 @@ public class UniversalSetterField {
         try {
             Class<?> clazz = object.getClass();
             String methodName = "set" + capitalize(fieldName); // np. setAge
-
             java.lang.reflect.Method method = clazz.getMethod(methodName, String.class);
             method.invoke(object, value);
             return true;
         } catch (NoSuchMethodException | IllegalAccessException | NumberFormatException e) {
-            e.printStackTrace();
+            System.out.println("Wpisano Niepoprawny znak !!! Sproboj Ponownie");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            System.out.println("Wpisano Niepoprawny znak !!! Sproboj Ponownie");
         }
         return false;
     }
