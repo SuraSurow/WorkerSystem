@@ -13,7 +13,7 @@ public class WorkerDataBase<T extends Worker> {
         this.workerByPesel = new HashMap<>();
     }
 
-    public void addWorker(T obj) {
+    synchronized public void addWorker(T obj) {
         if (workerByPesel.containsKey(obj.getPesel())) {
             System.out.println("Pracownik o podanym PESEL już istnieje w bazie.");
         } else {
@@ -22,15 +22,17 @@ public class WorkerDataBase<T extends Worker> {
         }
     }
 
-    public void setWorkerByPesel(Map<String, T> workerByPesel) {
+    synchronized public void setWorkerByPesel(Map<String, T> workerByPesel) {
         this.workerByPesel = workerByPesel;
     }
+
+
 
     public Map<String, T> getWorkerByPesel() {
         return workerByPesel;
     }
 
-    public void deleteWorker(T obj){
+    synchronized public void deleteWorker(T obj){
         workerByPesel.remove(obj.getPesel());
     }
 
@@ -51,6 +53,8 @@ public class WorkerDataBase<T extends Worker> {
         if (workerByPesel.isEmpty()) return true;
         return false;
     }
+
+
 
 
 }

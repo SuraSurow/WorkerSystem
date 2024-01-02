@@ -5,6 +5,7 @@ package Controller;
 import Model.Worker.*;
 import Service.CurrentDirectory;
 import Service.FileService;
+import Service.InitService;
 
 import java.util.Scanner;
 
@@ -35,9 +36,7 @@ public class Menu<T extends Worker> {
                 destroyer.deleteRecord(scanner);
                 return true;
             case 4:
-                String fileName = CurrentDirectory.getCurrentDirectory() + "\\MojeDane";
-                System.out.println(fileName);
-                WorkerSerialization backup = new WorkerSerialization(dataBAse,fileName );
+                WorkerSerialization backup = new WorkerSerialization(dataBAse);
                 backup.backup(scanner);
                 return true;
             case 5:

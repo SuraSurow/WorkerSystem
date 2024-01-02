@@ -10,17 +10,31 @@ import java.util.zip.*;
 
 public class FileService<T extends Worker> {
     private WorkerDataBase<T> DataBase;
+    private String nameFile;
     private String path;
 
-    public FileService(String nameFile, WorkerDataBase<T> dataBase) {
+
+    public FileService(String nameFile,String path, WorkerDataBase<T> dataBase) {
         this.DataBase = dataBase;
-        this.path = nameFile;
+        this.nameFile = nameFile;
+        this.path = path;
+    }
+
+    public static String getCommonNameFile()
+    {
+        return "MyData";
+    }
+    public static String getPathCommonFile()
+    {
+        return CurrentDirectory.getCurrentDirectory()+"\\";
     }
 
 
-    public static void serializeToFile(WorkerDataBase dataBase,String fileName)
+
+
+    public static void serializeToFile(WorkerDataBase dataBase,String path,String fileName)
     {
-        serializeToFile(dataBase.getWorkerByPesel(),fileName);
+        serializeToFile(dataBase.getWorkerByPesel(),path+fileName);
     }
 
     private static void serializeToFile(Object obj, String fileName) {
@@ -89,50 +103,54 @@ public class FileService<T extends Worker> {
         }
     }
 
-    public static Map<String, Worker> deserializeZip(String zipFileName)
+    public static Map<String, Worker> deserializeZip(String path,String zipFileName)
     {
-        return deserializeFromZip(zipFileName);
+        return deserializeFromZip(path+zipFileName);
     }
-    public static Map<String, Worker> deserializeGzip(String zipFileName)
+    public static Map<String, Worker> deserializeGzip(String path,String zipFileName)
     {
-        return deserializeFromGzip(zipFileName);
+        return deserializeFromGzip(path+zipFileName);
     }
     private static Map<String, Worker> deserializeFromZip(String zipFileName) {
-        Map<String, Worker> deserializedMap = new HashMap<>();
-        try (FileInputStream fis = new FileInputStream(zipFileName);
-             ZipInputStream zis = new ZipInputStream(fis)) {
+        try {
+            //TU
+            Map<String, Worker> deserializedMap = new HashMap<>();
+            File file = new File(zipFileName);
+            FileInputStream fis = new FileInputStream(file);
+            ZipInputStream zipInputStream = new ZipInputStream(fis);
+            zipInputStream.getNextEntry();
+            ObjectInputStream objectInputStream = new ObjectInputStream(zipInputStream);
+            deserializedMap = (Map<String,Worker>)objectInputStream.readObject();
+            zipInputStream.closeEntry();
+            zipInputStream.close();
+            objectInputStream.close();
 
-            ZipEntry zipEntry = zis.getNextEntry();
-
-            try (ObjectInputStream ois = new ObjectInputStream(zis)) {
-                Object obj = ois.readObject();
-                if (obj instanceof Map) {
-                    deserializedMap = (Map<String, Worker>) obj;
-                    System.out.println("Deserialized data from ZIP archive: " + zipFileName);
-                }
-            }
-
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            return deserializedMap;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return deserializedMap;
+
     }
     private static Map<String, Worker> deserializeFromGzip(String gzipFileName) {
-        Map<String, Worker> deserializedMap = new HashMap<>();
-        try (FileInputStream fis = new FileInputStream(gzipFileName);
-             GZIPInputStream gzis = new GZIPInputStream(fis);
-             ObjectInputStream ois = new ObjectInputStream(gzis)) {
+        try {
+            Map<String, Worker> deserializedMap;
+            FileInputStream fis = new FileInputStream(gzipFileName);
+            GZIPInputStream gzipInputStream = new GZIPInputStream(fis);
+            ObjectInputStream objectInputStream = new ObjectInputStream(gzipInputStream);
+            deserializedMap = (Map<String, Worker>) objectInputStream.readObject();
+            objectInputStream.close();
+            gzipInputStream.close();
 
-            Object obj = ois.readObject();
-            if (obj instanceof Map) {
-                deserializedMap = (Map<String, Worker>) obj;
-                System.out.println("Deserialized data from GZIP archive: " + gzipFileName);
-            }
-
+            return deserializedMap;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return deserializedMap;
     }
 
 }

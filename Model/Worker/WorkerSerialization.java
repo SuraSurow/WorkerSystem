@@ -1,9 +1,10 @@
 package Model.Worker;
 
 
-import Service.CurrentDirectory;
 import Service.FileService;
+import Service.ObjectFileService;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class WorkerSerialization {
@@ -13,6 +14,8 @@ public class WorkerSerialization {
 
     private String fileName;
 
+    private String path;
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
@@ -20,13 +23,10 @@ public class WorkerSerialization {
     public WorkerSerialization(WorkerDataBase dataBase)
     {
         this.dataBase=dataBase;
-        this.fileName="data";
+        this.fileName=FileService.getCommonNameFile();
+        this.path = FileService.getPathCommonFile();
     }
-    public WorkerSerialization(WorkerDataBase dataBase,String name)
-    {
-        this.dataBase=dataBase;
-        this.fileName=name;
-    }
+
 
     public void backup(Scanner scanner)
     {
@@ -45,10 +45,10 @@ public class WorkerSerialization {
                 break;
             }
             else
-                {
-                    System.out.println("\nBlad , Wybierz Ponownie !!!");
-                    continue;
-                }
+            {
+                System.out.println("\nBlad , Wybierz Ponownie !!!");
+                continue;
+            }
         }
     }
 
@@ -58,10 +58,12 @@ public class WorkerSerialization {
         String choice = scanner.nextLine().toUpperCase();
         while (true) {
             if (choice.equals("Z")) {
-                exportDateToZip(scanner);
+                //exportDateToZip(scanner);
+                exportDateToZip();
                 break;
             } else if (choice.equals("G")) {
-                exportDateToGzip(scanner);
+                //exportDateToGzip(scanner);
+                exportDateToGzip();
                 break;
             }
         }
@@ -74,71 +76,45 @@ public class WorkerSerialization {
         System.out.println("============================\nWybrano Zaimportuj Dane ");
         System.out.println("Kompresja : [Z]ip / [G]zip ? ");
         String choice = scanner.nextLine().toUpperCase();
-        if ( choice.equals("Z"))
+        while(true)
         {
-            ImportDateFromZip(scanner);
-        }
-        else if ( choice.equals("G"))
-        {
-            ImportDateFromGzip(scanner);
+            if ( choice.equals("Z"))
+            {
+                //ImportDateFromZip(scanner);
+                ImportDateFromZip();
+                break;
+            }
+            else if ( choice.equals("G"))
+            {
+                //ImportDateFromGzip(scanner);
+                ImportDateFromGzip();
+                break;
+            }
         }
     }
 
-    private void ImportDateFromGzip(Scanner scanner) {
-        System.out.println("============================\nWybrano ZIP");
-        System.out.println("Zmieniamy Nazwe z domyślnej 'data.txt/ser/zip/gzip' [Y]es / [N]o   ? ");
-        String choice = scanner.nextLine().toUpperCase();
-        if ( choice.equals("Y"))
-        {
-            System.out.println("Wpisz nazwe plikow : ");
-            String name = scanner.nextLine();
-            setFileName(name);
-        }
-        dataBase.setWorkerByPesel(FileService.deserializeGzip(fileName+".gzip"));
-    }
 
-    private void ImportDateFromZip(Scanner scanner) {
-        System.out.println("============================\nWybrano GZIP");
-        System.out.println("Zmieniamy Nazwe z domyślnej 'data.txt/ser/zip/gzip' [Y]es / [N]o   ? ");
-        String choice = scanner.nextLine().toUpperCase();
-        if ( choice.equals("Y"))
-        {
-            System.out.println("Wpisz nazwe plikow : ");
-            String name = scanner.nextLine();
-            setFileName(name);
-        }
-        dataBase.setWorkerByPesel(FileService.deserializeZip(fileName+".zip"));
+    private void ImportDateFromGzip() {
+        ObjectFileService<Worker> palabellumService = new ObjectFileService<>();
+        palabellumService.importDataFromGzip(dataBase);
     }
+private void ImportDateFromZip() {
 
+    ObjectFileService<Worker> palabellumService = new ObjectFileService<>();
+    palabellumService.importDataFromZip(dataBase);
+    //dataBase.setWorkerByPesel(FileService.deserializeZip(path,fileName+".zip"));
+}
+private void exportDateToZip()
+{
+    ObjectFileService<Worker>palabellumService = new ObjectFileService<>();
+    palabellumService.exportDataToZip(dataBase);
 
-    private void exportDateToZip(Scanner scanner )
-    {
-        System.out.println("============================\nWybrano ZIP");
-        System.out.println("Zmieniamy Nazwe z domyślnej 'data.txt/ser/zip/gzip' [Y]es / [N]o   ? ");
-        String choice = scanner.nextLine().toUpperCase();
-        if ( choice.equals("Y"))
-        {
-            System.out.println("Wpisz nazwe plikow : ");
-            String name = scanner.nextLine();
-            setFileName(name);
-        }
-        FileService.serializeToFile(dataBase,fileName+".ser");
-        FileService.createZip(fileName+".ser",fileName+".zip");
-    }
-    private void exportDateToGzip(Scanner scanner) {
-        System.out.println("============================\nWybrano ZIP");
-        System.out.println("Zmieniamy Nazwe z domyślnej 'data.txt/ser/zip/gzip' [Y]es / [N]o   ? ");
-        String choice = scanner.nextLine().toUpperCase();
-        if ( choice.equals("Y"))
-        {
-            System.out.println("Wpisz nazwe plikow : ");
-            setFileName(scanner.nextLine());
-            scanner.nextLine();
-        }
-        FileService.serializeToFile(dataBase,fileName+".ser");
-        FileService.createGzip(fileName+".ser",fileName+".gzip");
-    }
-
+}
+private void exportDateToGzip()
+{
+    ObjectFileService<Worker>palabellumService = new ObjectFileService<>();
+    palabellumService.exportDataToGzip(dataBase);
+}
 
 
 }
