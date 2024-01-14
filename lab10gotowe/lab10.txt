@@ -1,0 +1,52 @@
+Zadanie 1 :
+	W moim przypadku mam wywalenie wyjatku Exception in thread "main" java.lang.IllegalThreadStateException
+	wiec chyba stawiam na RuntimeError
+	Odpowiedz: D
+Zadanie 2 :
+	Operacje atomowe sa synchonizowane wiec jest bezpieczna
+	Odopowiedz: A
+Zadanie 3 :
+	Nie zmienia zadnych monitorow czyli NIE
+	Odpowiedz : B
+Zadanie 4 :
+	W czasie pracy wywala wyjatek , dla drugiego wywolania start daje wyjatek IllegalThreadStateException
+	Odpowiedz : B
+Zadanie 5 :
+	Odpowiedz : C / D
+Zadanie 6 :
+	z Dokumentacji wyczytalem ze jest to interfejjs ktory wymaga  przeciazenia funckji
+	public void run() bez argumentow, tworzac nowa instancje wpisujemy 
+	Runnable r = new Runnable (<BRAK ARGUMENTOW>) { public void run (<BRAK ARGUMENTOW>) {cialo run} } ;
+	Odpowiedz : C
+Zadanie 7 : 
+	Nie trzeba , troche to psuje sens synchronizacji , synchronizujemy tylko  te rzeczy
+	ktore tego wymagaja (np dzialania atomowe , edycja  na zasobach .
+	Odpowiedz : B
+Zadanie 8 : 
+	Procesy maja przydzielana osobna przestrzen adresowa natomiast watki wspoldziela pamiec procesu
+	Odpowiedz : A
+Zadanie 9 :
+	Tak, uzycie ConcurrentHashMap nie wymaga uzycia zewnetrznej  synchronizacji
+	Odpowiedz : A
+Zadanie 10 : 
+	Wyswietlilo mi X a potem daje wyjatek , z tego co zrozumialem to wykonanie metody
+	wait bez zsynchronizowania obiektu ktorym to robimy aby watek byl wlascicielem monitora
+	obiektu zatem 
+	Odpowiedz : G
+Zadanie 11 : 
+	Wyswietla 1 2 poniewaz przez args.wait() powoduje zamrozenie watku i on czeka sobie 
+	i bedzie czekal ( nie wyswietlilo komunikatu code finished ) 
+	Odpowiedz : D
+Zadanie 12 : 
+	Chodz volatile zapewnia ze kazdy watek z zapisem i odczytem posiada globalna wartosc 
+	z pamieci to przy bardziej zlozonych operacjach jak inkrementacja moze to nie wystarczyc dlatego
+	moja odpowiedz to 
+	Odpowiedz : A
+Zadanie 13 :
+	SPrawdzilem i klasa Executors 
+	Odpowiedz : B
+Zadanie 14 :
+	TYlko odpowiedz c daje mi sie zbuildowac
+	Odpowiedz : C
+Zadanie 15
+	

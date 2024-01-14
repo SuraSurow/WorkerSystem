@@ -1,0 +1,72 @@
+Zadanie 1 
+	Zwiazku ze jest to leniwy operator wyswielania mapy , trzebabyloby uzyc terminalnego operatora
+	Odpowiedz: D
+Zadanie 2
+	Zwiazku ze Stream.generate()generuje nieskonczony dlugi ciag to od sie zawiesza
+	Odpowiedz: F
+Zadanie 3
+	Kod wyrzuca wyjatek , IDE podpowiada ze w drugim wywowalniu stream "Stream has already been linked or consumed"
+	Po wykonaniu operacji terminalnej czyli forEach,collect czy anyMatch strumien jest
+	uznawany za zużyty i nie mozna go ponownie użyć
+	Odpowiedz:E
+Zadanie 4
+	Dla jednego Strumienia mozna wykonac tylko  raz metode terminalna
+	Operacje terminalne sa wymagane aby moc aktywowac cala reszte operatorów
+	Odpowiedz A, B
+Zadanie 5
+	Odpowiedz C,
+Zadanie 6
+	AllMatch sprawdza czy wszyskie spelniaja warunek , zaden String nie jest pusty bo jest "meow"
+	anyMatch sprawdza czy jakikolwiek jest pusty, zaden String nie jest pusty
+	findAny,FindFirst,noneMatch zwroci true
+	Odpowiedz A,B
+Zadanie 7
+	private static List<String> sort(List<String> list) {
+        return list.stream()
+                .sorted((a, b) -> b.compareTo(a))
+                .collect(Collectors.toList());
+    }
+	Odpowiedz: F
+Zadanie 8
+	Odpowiedz D,E
+Zadanie 9
+	Odpowiedz D,B	
+Zadanie 10
+	 Stream.generate(() -> "1")
+                .limit(10)
+                .forEach(System.out::println);
+	Odpowiedz F
+Zadanie 11
+	Stream.iterate(1, x -> ++x)
+                .limit(5)
+                .collect(Collectors.toList())
+                .forEach(System.out::print);
+	Odpowiedz C i D
+Zadanie 12
+	Supplier<String> x = String::new;
+        BiConsumer<String,String> y = (a, b) -> System.out.println();
+        UnaryOperator<String> z = a -> a + a;
+	Odpowiedz: A , G , F
+Zadanie 13
+	map(x -> x + 1) niepoprawny sposob dodania
+	Odpowiedz : F
+Zadanie 14
+	
+java: incompatible types: bad return type in lambda expression
+    possible lossy conversion from double to int
+	Odpowiedz: D
+Zadanie 15:
+	Odpowiedz: B E
+Zadanie 16:
+{false=[], true=[]} {}
+	Odpowiedz: C
+Zadanie 17
+		
+	Odpowiedz: C , E 
+Zadanie 18:
+	Odpowiedz: D
+Zadanie 19:
+	Odpowiedz : A , C , E
+Zadanie 20:
+	Odpowiedz : B
+
