@@ -11,15 +11,14 @@ import Service.UniversalSetterField;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkerAdd {
+public class AddObj {
 
-    private WorkerDataBase<Worker> dataBase;
+    private DataBase<Worker> dataBase;
     private DataInputHandler inputHandler;
 
 
 
-    public
-    WorkerAdd(WorkerDataBase<Worker> dataBase , DataInputHandler inputHandler) {
+    public AddObj(DataBase<Worker> dataBase , DataInputHandler inputHandler) {
         this.dataBase = dataBase;
         this.inputHandler= inputHandler;
     }

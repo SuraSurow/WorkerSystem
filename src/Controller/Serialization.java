@@ -6,11 +6,11 @@ import Service.DataInputHandler;
 import Service.FileService;
 import Service.ObjectFileService;
 
-public class WorkerSerialization {
+public class Serialization {
 
     private DataInputHandler inputHandler;
 
-    private WorkerDataBase<Worker> dataBase;
+    private DataBase<Worker> dataBase;
 
     private String fileName;
 
@@ -20,7 +20,7 @@ public class WorkerSerialization {
         this.fileName = fileName;
     }
 
-    public WorkerSerialization(WorkerDataBase dataBase,DataInputHandler inputHandler)
+    public Serialization(DataBase dataBase, DataInputHandler inputHandler)
     {
         this.dataBase=dataBase;
         this.fileName=FileService.getCommonNameFile();

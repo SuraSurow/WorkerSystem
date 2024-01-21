@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 
 
-public class ApplicationController {
+public class Application {
     public void run(Scanner scanner)
     {
         System.out.println("\n\nUruchomiono Program\n");
-        WorkerDataBase<Worker> bazaDanych;
-        bazaDanych = new WorkerDataBase<>();
+        DataBase<Worker> bazaDanych;
+        bazaDanych = new DataBase<>();
         Menu<Worker> menu = new Menu(bazaDanych);
         while(true)
         {

@@ -1,4 +1,4 @@
-import Controller.ApplicationController;
+import Controller.Application;
 
 
 import java.util.Scanner;
@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        ApplicationController apk = new ApplicationController();
+        Application apk = new Application();
         apk.run(scanner);
         scanner.close();
 

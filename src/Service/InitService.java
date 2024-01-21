@@ -1,7 +1,7 @@
 package Service;
 
 import Model.Worker.Worker;
-import Controller.WorkerDataBase;
+import Controller.DataBase;
 
 public class InitService {
     public static boolean PeselChecker(String personalId) {
@@ -28,7 +28,7 @@ public class InitService {
         return isValid;
     }
 
-    public static boolean exceptionalPesel(String Pesel , WorkerDataBase<Worker> dataBase)
+    public static boolean exceptionalPesel(String Pesel , DataBase<Worker> dataBase)
     {
         String[] arrayKey = dataBase.getAllPesels().toArray(new String[0]);
         for ( int i = 0 ; i < arrayKey.length ;i++)

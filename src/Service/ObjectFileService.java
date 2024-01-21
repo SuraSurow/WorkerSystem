@@ -1,7 +1,7 @@
 package Service;
 
 import Model.Worker.Worker;
-import Controller.WorkerDataBase;
+import Controller.DataBase;
 
 import java.io.*;
 import java.nio.file.*;
@@ -48,7 +48,7 @@ public class ObjectFileService<T extends Worker> {
         return zipFiles != null ? zipFiles.length : 0;
     }
 
-    public void importDataFromGzip(WorkerDataBase<T> dataBase) {
+    public void importDataFromGzip(DataBase<T> dataBase) {
         System.out.println("============================\nWybrano GZIP");
         File backupDirectory = new File(pathToDirectory);
 
@@ -87,7 +87,7 @@ public class ObjectFileService<T extends Worker> {
         }
     }
 
-    public void importDataFromZip(WorkerDataBase<T> dataBase) {
+    public void importDataFromZip(DataBase<T> dataBase) {
         System.out.println("============================\nWybrano ZIP");
         File backupDirectory = new File(pathToDirectory);
         int numberOfZipFiles = countZipFiles(backupDirectory);
@@ -152,7 +152,7 @@ public class ObjectFileService<T extends Worker> {
         }
     }
 //--------------------------------------------------------------------
-    public void exportDataToGzip(WorkerDataBase<T> dataBase) {
+    public void exportDataToGzip(DataBase<T> dataBase) {
         System.out.println("============================\nWybrano GZIP");
         ExecutorService executor = Executors.newFixedThreadPool(10);
         CompletableFuture<Void>[] futures = new CompletableFuture[dataBase.getSize()];
@@ -199,7 +199,7 @@ public class ObjectFileService<T extends Worker> {
         return pathToDirectory + File.separator + pesel + ".gz";
     }
 //---------------------------------------------------------------------
-    public void exportDataToZip(WorkerDataBase<T> dataBase) {
+    public void exportDataToZip(DataBase<T> dataBase) {
         System.out.println("============================\nWybrano ZIP");
         ExecutorService executor = Executors.newFixedThreadPool(10);
 

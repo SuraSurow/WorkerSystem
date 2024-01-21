@@ -4,11 +4,11 @@ import Model.Worker.Worker;
 import Service.DataInputHandler;
 import View.View;
 
-public class WorkerDelete {
-    private WorkerDataBase<Worker> dataBase;
+public class Delete {
+    private DataBase<Worker> dataBase;
     private DataInputHandler inputHandler;
 
-    public WorkerDelete(WorkerDataBase<Worker> dataBase , DataInputHandler inputHandler)
+    public Delete(DataBase<Worker> dataBase , DataInputHandler inputHandler)
     {
         this.dataBase = dataBase;
         this.inputHandler=inputHandler;

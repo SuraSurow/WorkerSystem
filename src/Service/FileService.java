@@ -1,7 +1,6 @@
 package Service;
 
 import Model.Worker.Worker;
-import Controller.WorkerDataBase;
 
 import java.io.*;
 import java.util.HashMap;
@@ -9,12 +8,12 @@ import java.util.Map;
 import java.util.zip.*;
 
 public class FileService<T extends Worker> {
-    private WorkerDataBase<T> DataBase;
+    private Controller.DataBase<T> DataBase;
     private String nameFile;
     private String path;
 
 
-    public FileService(String nameFile,String path, WorkerDataBase<T> dataBase) {
+    public FileService(String nameFile,String path, Controller.DataBase<T> dataBase) {
         this.DataBase = dataBase;
         this.nameFile = nameFile;
         this.path = path;
@@ -32,7 +31,7 @@ public class FileService<T extends Worker> {
 
 
 
-    public static void serializeToFile(WorkerDataBase dataBase,String path,String fileName)
+    public static void serializeToFile(Controller.DataBase dataBase, String path, String fileName)
     {
         serializeToFile(dataBase.getWorkerByPesel(),path+fileName);
     }

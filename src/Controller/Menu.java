@@ -4,13 +4,14 @@ package Controller;
 
 import Model.Worker.*;
 import Service.DataInputHandler;
+import View.List;
 
 import java.util.Scanner;
 
 public class Menu<T extends Worker> {
-    private WorkerDataBase<Worker> dataBAse;
+    private DataBase<Worker> dataBAse;
 
-    public Menu(WorkerDataBase input) {
+    public Menu(DataBase input) {
         this.dataBAse = input;
 
     }
@@ -23,19 +24,19 @@ public class Menu<T extends Worker> {
         DataInputHandler inputHandler = new DataInputHandler(scanner);
         switch (choice) {
             case 1:
-                WorkerList workerList = new WorkerList(dataBAse,inputHandler);
+                List workerList = new List(dataBAse,inputHandler);
                 workerList.showMenu();
                 return true;
             case 2:
-                WorkerAdd adderWorker = new WorkerAdd(dataBAse,inputHandler);
+                AddObj adderWorker = new AddObj(dataBAse,inputHandler);
                 adderWorker.addWorker();
                 return true;
             case 3:
-                WorkerDelete destroyer = new WorkerDelete(dataBAse,inputHandler);
+                Delete destroyer = new Delete(dataBAse,inputHandler);
                 destroyer.deleteRecord();
                 return true;
             case 4:
-                WorkerSerialization backup = new WorkerSerialization(dataBAse,inputHandler);
+                Serialization backup = new Serialization(dataBAse,inputHandler);
                 backup.backup();
                 return true;
             case 5:

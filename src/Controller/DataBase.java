@@ -5,13 +5,13 @@ import Model.Worker.Worker;
 
 import java.util.*;
 
-public class WorkerDataBase<T extends Worker> {
+public class DataBase<T extends Worker> {
     private Map<String, T> workerByPesel;
 
 
     private  Object lastAddedObject;
 
-    public WorkerDataBase() {
+    public DataBase() {
         this.workerByPesel = new HashMap<>();
     }
 

@@ -1,18 +1,18 @@
-package Controller;
+package View;
 
+import Controller.DataBase;
 import Model.Worker.Worker;
 import Service.DataInputHandler;
 import View.View;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
-public class WorkerList {
-    private WorkerDataBase dataBase;
+public class List {
+    private DataBase dataBase;
 
     private DataInputHandler inputHandler;
-    public WorkerList(WorkerDataBase base , DataInputHandler inputHandler)
+    public List(DataBase base , DataInputHandler inputHandler)
     {
         this.dataBase = base;
         this.inputHandler = inputHandler;
@@ -29,7 +29,7 @@ public class WorkerList {
             return;
         }
         Set<String> pesels = dataBase.getAllPesels();
-        List<String> peselList = new ArrayList<>(pesels);
+        java.util.List<String> peselList = new ArrayList<>(pesels);
         boolean run = true;
         int position = 0;
         while (run && position < peselList.size()) {

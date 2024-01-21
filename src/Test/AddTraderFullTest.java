@@ -14,22 +14,22 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-public class AddDirectorFullTest {
+public class AddTraderFullTest {
 
     private DataBase<Worker> testDataBase;
     private DataInputHandler inputHandler;
 
     private List<List<String>> dataObj = new ArrayList<>(
             Arrays.asList(
-                    Arrays.asList("D", "70041579919", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0","312", "3333.0"),
-                    Arrays.asList("D", "75062848169", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0","312", "3333.0"),
-                    Arrays.asList("D", "80041735558", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0","312", "3333.0"),
-                    Arrays.asList("D", "57042748586", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0","312", "3333.0"),
-                    Arrays.asList("D", "84111982514", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0", "312","3333.0")
+                    Arrays.asList("H", "70041579919", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0", "3333.0"),
+                    Arrays.asList("H", "75062848169", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0", "3333.0"),
+                    Arrays.asList("H", "80041735558", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0", "3333.0"),
+                    Arrays.asList("H", "57042748586", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0", "3333.0"),
+                    Arrays.asList("H", "84111982514", "Uga", "Buga", "Magik", "4231.0", "997997997", "1000.0", "3333.0")
             )
     );
 
-    public AddDirectorFullTest()
+    public AddTraderFullTest()
     {
         testDataBase = new DataBase<>();
         inputHandler = Mockito.mock(DataInputHandler.class);
@@ -46,8 +46,7 @@ public class AddDirectorFullTest {
                     .thenReturn(field.get(5))
                     .thenReturn(field.get(6))
                     .thenReturn(field.get(7))
-                    .thenReturn(field.get(8))
-                    .thenReturn(field.get(9));
+                    .thenReturn(field.get(8));
 
             Assertions.assertTrue(dodawacz.addWorker());
         }
@@ -55,8 +54,8 @@ public class AddDirectorFullTest {
 
     @Test
     public void test() {
-        List<String> field = Arrays.asList("D", "59061818475", "AHA", "TO", "NIEWIARYGODNE", "1111.0", "232232323", "99999.0", "123123", "1123.0");
+        List<String> field = Arrays.asList("H", "59061818475", "AHA", "TO", "NIEWIARYGODNE", "1111.0", "232232323", "99999.0",  "1123.0");
         inputHandler = Mockito.mock(DataInputHandler.class);
-        TestMethod.checkDirector(field,testDataBase,inputHandler);
+        TestMethod.checkTrader(field,testDataBase,inputHandler);
     }
 }
