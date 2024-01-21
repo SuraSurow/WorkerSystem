@@ -18,7 +18,8 @@ public class WorkerAdd {
 
 
 
-    public WorkerAdd(WorkerDataBase<Worker> dataBase , DataInputHandler inputHandler) {
+    public
+    WorkerAdd(WorkerDataBase<Worker> dataBase , DataInputHandler inputHandler) {
         this.dataBase = dataBase;
         this.inputHandler= inputHandler;
     }
@@ -34,7 +35,7 @@ public class WorkerAdd {
         while (newWorker == null) {
             System.out.println("\n\nWybierz Kategorie\n\n[D]yrektor/[H]handlowiec: ");
 
-            String category = inputHandler.getUserInputUpperCase();
+            String category = inputHandler.getUserInput();
             if (category.equals("D")) {
                 newWorker = new Director();
             } else if (category.equals("H")) {
