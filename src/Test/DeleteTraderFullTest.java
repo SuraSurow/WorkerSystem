@@ -2,6 +2,7 @@ package Test;
 
 import Controller.AddObj;
 import Controller.DataBase;
+import Model.Inherited.Trader;
 import Model.Worker.Worker;
 import Service.DataInputHandler;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-public class AddTraderFullTest {
+public class DeleteTraderFullTest {
 
     private DataBase<Worker> testDataBase;
     private DataInputHandler inputHandler;
@@ -29,7 +30,7 @@ public class AddTraderFullTest {
             )
     );
 
-    public AddTraderFullTest()
+    public DeleteTraderFullTest()
     {
         testDataBase = new DataBase<>();
         inputHandler = Mockito.mock(DataInputHandler.class);
@@ -54,8 +55,15 @@ public class AddTraderFullTest {
 
     @Test
     public void test() {
-        List<String> field = Arrays.asList("H", "59061818475", "AHA", "TO", "NIEWIARYGODNE", "1111.0", "232232323", "99999.0",  "1123.0");
+        List<String> field = Arrays.asList("H", "89071959824", "TO", "chce", "Usunac", "1111.0", "232232323", "99999.0",  "1123.0");
+        Trader wannaDelete = new Trader(field.get(1),field.get(2), field.get(3), field.get(4), field.get(5), field.get(6), field.get(7),field.get(8));
         inputHandler = Mockito.mock(DataInputHandler.class);
         TestMethod.checkTraderADd(field,testDataBase,inputHandler);
+        testDataBase.deleteWorker(wannaDelete);
+        String[] keyArray = testDataBase.getAllPesels().toArray(new String[0]);
+        for(int i = 0 ; i < testDataBase.getSize() ; i ++)
+        {
+            Assertions.assertNotEquals(wannaDelete,testDataBase.getWorkerByPesel(keyArray[i]));
+        }
     }
 }

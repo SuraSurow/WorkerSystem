@@ -13,7 +13,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 public class TestMethod {
-    public static void checkDirector(List<String> field, DataBase<Worker> data, DataInputHandler inputHandler)
+    public static void checkDirectorAdd(List<String> field, DataBase<Worker> data, DataInputHandler inputHandler)
     {
         when(inputHandler.getUserInput())
                 .thenReturn(field.get(0))
@@ -40,7 +40,7 @@ public class TestMethod {
         Assertions.assertEquals(field.get(9), String.valueOf(obiekt.getLimitCosts()));
     }
 
-    public static void checkTrader(List<String> field, DataBase<Worker> data , DataInputHandler inputHandler)
+    public static void checkTraderADd(List<String> field, DataBase<Worker> data , DataInputHandler inputHandler)
     {
         when(inputHandler.getUserInput())
                 .thenReturn(field.get(0))

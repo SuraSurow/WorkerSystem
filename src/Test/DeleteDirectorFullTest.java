@@ -2,6 +2,7 @@ package Test;
 
 import Controller.AddObj;
 import Controller.DataBase;
+import Model.Inherited.Director;
 import Model.Worker.Worker;
 import Service.DataInputHandler;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import java.util.List;
 
 import static org.mockito.Mockito.when;
 
-public class AddDirectorFullTest {
+public class DeleteDirectorFullTest {
 
     private DataBase<Worker> testDataBase;
     private DataInputHandler inputHandler;
@@ -29,7 +30,7 @@ public class AddDirectorFullTest {
             )
     );
 
-    public AddDirectorFullTest()
+    public DeleteDirectorFullTest()
     {
         testDataBase = new DataBase<>();
         inputHandler = Mockito.mock(DataInputHandler.class);
@@ -55,8 +56,15 @@ public class AddDirectorFullTest {
 
     @Test
     public void test() {
-        List<String> field = Arrays.asList("D", "59061818475", "AHA", "TO", "NIEWIARYGODNE", "1111.0", "232232323", "99999.0", "123123", "1123.0");
+        List<String> field = Arrays.asList("D", "57062166214", "TO", "chce", "Usunac", "2213.2", "555555555", "141414.0", "999392", "44444.0");
+        Director wannaDelete = new Director( field.get(1), field.get(2), field.get(3), field.get(4), field.get(5), field.get(6), field.get(7),field.get(8), field.get(9));
         inputHandler = Mockito.mock(DataInputHandler.class);
         TestMethod.checkDirectorAdd(field,testDataBase,inputHandler);
+        testDataBase.deleteWorker(wannaDelete);
+        String[] keyArray = testDataBase.getAllPesels().toArray(new String[0]);
+        for(int i = 0 ; i < testDataBase.getSize() ; i ++)
+        {
+            Assertions.assertNotEquals(wannaDelete,testDataBase.getWorkerByPesel(keyArray[i]));
+        }
     }
 }

@@ -15,6 +15,18 @@ public class Trader extends Worker implements Serializable {
         this.CommissionRate = BigDecimal.valueOf(0);
         this.LimitCommission = BigDecimal.valueOf(0);
     }
+
+    public Trader(String pesel, String name, String surname, String position, String salary, String phone, String comision,String limit) {
+        setPesel(pesel);
+        setName(name);
+        setSurname(surname);
+        setPosition(position);
+        setSalary(salary);
+        setPhoneNumber(phone);
+        setCommissionRate(comision);
+        setLimitCommission(limit);
+    }
+
     public BigDecimal getCommissionRate() {
         return CommissionRate;
     }
